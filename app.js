@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
 const cors = require('cors')
-const aggrement = require("./routers/agreement.js")
+const agreement = require("./routers/agreement.js")
 const dburl =process.env.ATLASDB_URL
 main()
 .then(()=>{
@@ -22,7 +22,7 @@ async function main() {
 
 app.use(cors())
 
-app.use("/contract",aggrement);
+app.use("/contract",agreement);
 
 app.get("/",(req,res)=>{
     res.send("Hi, I am root page")
