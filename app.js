@@ -8,6 +8,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const agreement = require("./routers/agreement.js")
 const dburl =process.env.ATLASDB_URL
+const userRouter = require("./routers/user.js")
+
 main()
 .then(()=>{
     console.log("Connected to the atlas db")
@@ -23,6 +25,7 @@ async function main() {
 app.use(cors())
 
 app.use("/contract",agreement);
+app.use("/user",userRouter);
 
 app.get("/",(req,res)=>{
     res.send("Hi, I am root page")
