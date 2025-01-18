@@ -4,6 +4,7 @@ const agreementSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String },
     terms: { type: String}, 
+    user : {type:String},
     //url:{type:String},
     //cloudinaryUrl: { type: String, required: true }, 
     status: { type: String, enum: ['draft', 'sent', 'signed', 'expired'], default: 'draft' },
