@@ -62,12 +62,13 @@ module.exports.deleteAgreement = async (req, res) => {
 
 module.exports.createAgreement = async (req, res) => {
     try {
-        const { title, description, expirationDate} = req.body;
+        const { title, description, expirationDate,userid} = req.body;
         // const cloudinaryUrl = req.file.path; // Get the Cloudinary URL from the uploaded file
 
         const agreement = new Agreement({
             title,
             description,
+            userid:userid,
             //terms: cloudinaryUrl,
             status: 'draft',
             expirationDate,
