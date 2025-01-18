@@ -15,7 +15,7 @@ module.exports.getAgreements = async(req,res)=>{
 module.exports.updateAgreement = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, expirationDate, status, markDown } = req.body;
+        const { expirationDate, status} = req.body;
 
         const existingAgreement = await Agreement.findById(id);
         if (!existingAgreement) {
@@ -23,11 +23,8 @@ module.exports.updateAgreement = async (req, res) => {
         }
 
         const updateData = {
-            title: title !== undefined ? title : existingAgreement.title,
-            description: description !== undefined ? description : existingAgreement.description,
             expirationDate: expirationDate !== undefined ? expirationDate : existingAgreement.expirationDate,
             status: status !== undefined ? status : existingAgreement.status,
-            markDown: markDown !== undefined ? markDown : existingAgreement.markDown,
             updatedAt: Date.now(), 
         };
 
@@ -62,14 +59,12 @@ module.exports.deleteAgreement = async (req, res) => {
 
 module.exports.createAgreement = async (req, res) => {
     try {
-        const { title, description, expirationDate,userid} = req.body;
+        const { id,expirationDate,userid} = req.body;
         // const cloudinaryUrl = req.file.path; // Get the Cloudinary URL from the uploaded file
 
         const agreement = new Agreement({
-            title,
-            description,
+            id,
             userid:userid,
-            //terms: cloudinaryUrl,
             status: 'draft',
             expirationDate,
         });
