@@ -11,6 +11,8 @@ const agreementSchema = new mongoose.Schema({
     chatHistory:{type : String},
 });
 
-const Agreement = mongoose.model('Agreement', agreementSchema);
 
-module.exports = Agreement;
+
+const Contract = mongoose.model('Agreement', agreementSchema);
+
+module.exports = Contract;

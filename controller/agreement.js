@@ -1,8 +1,8 @@
-const Agreement = require("../models/agreement.js")
+const Contract = require("../models/agreement.js")
 
 module.exports.getAgreements = async(req,res)=>{
     try{
-        const agreements = await Agreement.find();
+        const agreements = await Contract.find();
         if(!agreements){
             res.send({success:"false",msg:"Agreements not found"});
         }
@@ -19,7 +19,7 @@ module.exports.updateAgreement = async (req, res) => {
         const { id } = req.params;
         const { expirationDate, status} = req.body;
 
-        const existingAgreement = await Agreement.findById(id);
+        const existingAgreement = await Contract.findById(id);
         if (!existingAgreement) {
             return res.status(404).json({ error: 'Agreement not found' });
         }
@@ -30,7 +30,7 @@ module.exports.updateAgreement = async (req, res) => {
             updatedAt: Date.now(), 
         };
 
-        const updatedAgreement = await Agreement.findByIdAndUpdate(id, updateData, { new: true });
+        const updatedAgreement = await Contract.findByIdAndUpdate(id, updateData, { new: true });
 
         if (!updatedAgreement) {
             return res.status(404).json({ error: 'Agreement not found' });
@@ -46,7 +46,7 @@ module.exports.updateAgreement = async (req, res) => {
 module.exports.deleteAgreement = async (req, res) => {
     try {
         const { id } = req.params; 
-        const deletedAgreement = await Agreement.findByIdAndDelete(id);
+        const deletedAgreement = await Contract.findByIdAndDelete(id);
 
         if (!deletedAgreement) {
             return res.status(404).json({ error: 'Agreement not found' });
@@ -64,7 +64,7 @@ module.exports.createAgreement = async (req, res) => {
         const { id,expirationDate,userid} = req.body;
         // const cloudinaryUrl = req.file.path; // Get the Cloudinary URL from the uploaded file
 
-        const agreement = new Agreement({
+        const agreement = new Contract({
             id,
             userid:userid,
             status: 'draft',
@@ -85,12 +85,12 @@ module.exports.addChatHistory = async (req, res) => {
         const { id } = req.params;
         const msg = req.body.content;
 
-        const result = await Agreement.find({ id: id });
+        const result = await Contract.find({ id: id });
         if (result.length === 0) {
             return res.status(404).send({ success: false, msg: 'Id does not exist' });
         }
 
-        const updatedAgreement = await Agreement.findOneAndUpdate(
+        const updatedAgreement = await Contract.findOneAndUpdate(
             { id: id },
             { chatHistory: msg },
             { new: true }

@@ -1,6 +1,6 @@
 const express = require('express');
 const agreement = express.Router();
-const Agreement = require("../models/agreement.js");
+//const Agreement = require("../models/agreement.js");
 const agreementControllers = require("../controller/agreement.js")
 
 agreement.use(express.json());

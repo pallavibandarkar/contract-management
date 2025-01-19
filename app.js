@@ -10,6 +10,7 @@ const agreement = require("./routers/agreement.js")
 const dburl =process.env.ATLASDB_URL
 const userRouter = require("./routers/user.js")
 
+
 main()
 .then(()=>{
     console.log("Connected to the atlas db")
@@ -23,6 +24,27 @@ async function main() {
 }
 
 app.use(cors())
+
+// async function dropIndex() {
+//     await mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true });
+
+//     const Agreement = mongoose.model('Agreement', new mongoose.Schema({
+//         id: { type: String, required: true, unique: true },
+//         userid: { type: String },
+//         expirationDate: { type: String },
+//         status: { type: String, default: 'draft' },
+//         createdAt: { type: Date, default: Date.now },
+//         updatedAt: { type: Date, default: Date.now },
+//         chatHistory: { type: String },
+//     }));
+
+//     await Agreement.collection.dropIndex("userid_1");
+//     console.log("Index dropped successfully");
+
+    
+// }
+
+//dropIndex().catch(err => console.error(err));
 
 app.use("/contract",agreement);
 app.use("/user",userRouter);
