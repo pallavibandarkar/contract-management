@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const agreementSchema = new mongoose.Schema({
     id:{type:String,required:true,unique:true},
-    userid:{type:String,required:true,},
+    userid:{type:String,},
     expirationDate: { type: String },
     status: { type: String,default: 'draft' },
     //createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User ' },
