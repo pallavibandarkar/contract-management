@@ -6,8 +6,10 @@ module.exports.getAgreements = async(req,res)=>{
         if(!agreements){
             res.send({success:"false",msg:"Agreements not found"});
         }
+        console.log(agreements)
         res.send({success:true,data:agreements})
     }catch(err){
+        console.console.log(err);
         res.send({success:"false",msg:"Agreements not found",error:err});
     }
 }
@@ -33,7 +35,7 @@ module.exports.updateAgreement = async (req, res) => {
         if (!updatedAgreement) {
             return res.status(404).json({ error: 'Agreement not found' });
         }
-
+        console.log(updatedAgreement)
         res.status(200).json(updatedAgreement);
     } catch (error) {
         console.error('Error updating agreement:', error);
@@ -49,7 +51,7 @@ module.exports.deleteAgreement = async (req, res) => {
         if (!deletedAgreement) {
             return res.status(404).json({ error: 'Agreement not found' });
         }
-
+        console.log(deletedAgreement)
         res.status(200).json({ message: 'Agreement deleted successfully' });
     } catch (error) {
         console.error('Error deleting agreement:', error);
@@ -70,6 +72,7 @@ module.exports.createAgreement = async (req, res) => {
         });
 
         await agreement.save();
+        console.log(agreement)
         res.status(201).json(agreement);
     } catch (error) {
         console.error('Error creating agreement:', error);
