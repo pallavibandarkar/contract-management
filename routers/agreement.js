@@ -15,4 +15,6 @@ agreement.delete('/agreements/:id', agreementControllers.deleteAgreement);
 
 agreement.get("/agreements",agreementControllers.getAgreements)
 
+agreement.put("/chatHistory/:id",agreementControllers.addChatHistory)
+
 module.exports = agreement;

@@ -79,3 +79,30 @@ module.exports.createAgreement = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while creating the agreement.' });
     }
 }
+
+module.exports.addChatHistory = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const msg = req.body.content;
+
+        const result = await Agreement.find({ id: id });
+        if (result.length === 0) {
+            return res.status(404).send({ success: false, msg: 'Id does not exist' });
+        }
+
+        const updatedAgreement = await Agreement.findOneAndUpdate(
+            { id: id },
+            { chatHistory: msg },
+            { new: true }
+        );
+
+        if (!updatedAgreement) {
+            return res.status(404).json({ success: false, error: 'Agreement not found' });
+        }
+
+        res.status(200).json(updatedAgreement);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+};
